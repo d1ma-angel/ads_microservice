@@ -15,7 +15,7 @@ gem 'rack-contrib', require: 'rack/contrib'
 gem 'rake'
 gem 'sinatra', require: %w[sinatra/base sinatra/reloader]
 gem 'sinatra-activerecord', require: 'sinatra/activerecord'
-gem 'sinatra-contrib', require: 'sinatra/required_params'
+gem 'sinatra-contrib', require: %w[sinatra/required_params sinatra/json]
 gem 'zeitwerk'
 
 group :development do

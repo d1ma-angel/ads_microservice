@@ -25,7 +25,7 @@ module Concerns
                  ErrorSerializer.from_messages(error_messages)
                end
 
-      halt status, errors.to_json
+      json status: status, body: errors
     end
   end
 end
