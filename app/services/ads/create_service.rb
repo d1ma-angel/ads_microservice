@@ -8,13 +8,19 @@ module Ads
       option :title
       option :description
       option :city
-      option :user_id
     end
+
+    option :user_id
 
     attr_reader :ad
 
     def call
-      @ad = ::Ad.new(@ad.to_h)
+      @ad = ::Ad.new(
+        title: @ad.title,
+        description: @ad.description,
+        city: @ad.city,
+        user_id: @user_id
+      )
       return fail!(@ad.errors) unless @ad.save
     end
   end

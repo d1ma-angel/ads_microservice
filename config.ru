@@ -1,4 +1,7 @@
 # frozen_string_literal: true
 
 require './dependencies'
-run ApplicationController
+
+map '/ads' do
+  run ApplicationController
+end

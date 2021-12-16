@@ -13,6 +13,9 @@ class BaseController < Sinatra::Base
     register Sinatra::Reloader
   end
 
+  include Concerns::ApiErrors
+  include Concerns::PaginationLinks
+
   error 400 do
     handle_exception(RequiredParamMissing.new)
   end

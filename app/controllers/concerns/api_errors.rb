@@ -25,7 +25,8 @@ module Concerns
                  ErrorSerializer.from_messages(error_messages)
                end
 
-      json status: status, body: errors
+      status status
+      json({ status: status }.merge(errors))
     end
   end
 end
