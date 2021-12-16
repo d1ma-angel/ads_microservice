@@ -18,8 +18,19 @@ gem 'sinatra-activerecord', require: 'sinatra/activerecord'
 gem 'sinatra-contrib', require: %w[sinatra/required_params sinatra/json]
 gem 'zeitwerk'
 
-group :development do
+group :development, :test do
   gem 'byebug'
+end
+
+group :development do
   gem 'rubocop', require: false
   gem 'rubocop-rake', require: false
+  gem 'rubocop-rspec', require: false
+end
+
+group :test do
+  gem 'factory_bot'
+  gem 'rack-test'
+  gem 'rspec'
+  gem 'database_cleaner-active_record'
 end

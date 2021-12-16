@@ -1,9 +1,6 @@
 # frozen_string_literal: true
 
 class AdsController < BaseController
-  include Concerns::ApiErrors
-  include Concerns::PaginationLinks
-
   get '/?' do
     ads = Ad.order(updated_at: :desc).page(params[:page])
     serializer = AdSerializer.new(ads, links: pagination_links(ads))
@@ -12,7 +9,7 @@ class AdsController < BaseController
   end
 
   post '/?' do
-    required_params ad: %i[title description city user_id]
+    required_params 'user_id', 'ad' => %w[title description city]
 
     result = Ads::CreateService.call(params.deep_symbolize_keys)
 
