@@ -14,6 +14,9 @@ RSpec.describe 'Ads API', type: :routes do
     let(:user_id) { 123 }
     let(:auth_token) { 'auth.token' }
     let(:auth_service) { instance_double('Auth service') }
+    let(:city) { 'City' }
+    let(:coordinates) { [64.5625385, 39.8180934] }
+    let(:geocoder_service) { instance_double('Geocoder service') }
 
     before do
       allow(auth_service).to receive(:auth)
@@ -22,6 +25,13 @@ RSpec.describe 'Ads API', type: :routes do
 
       allow(AuthService::Client).to receive(:new)
         .and_return(auth_service)
+
+      allow(geocoder_service).to receive(:geocode)
+        .with(city)
+        .and_return(coordinates)
+
+      allow(GeocoderService::Client).to receive(:new)
+        .and_return(geocoder_service)
 
       header 'Authorization', "Bearer #{auth_token}"
     end
@@ -42,6 +52,7 @@ RSpec.describe 'Ads API', type: :routes do
           city: ''
         }
       end
+      let(:city) { nil }
 
       it 'returns an error' do
         post '/', ad: ad_params
@@ -73,10 +84,10 @@ RSpec.describe 'Ads API', type: :routes do
 
         expect(last_response.status).to eq(403)
         expect(response_body['errors']).to include(
-         {
-           'detail' => 'Доступ к ресурсу ограничен'
-         }
-       )
+          {
+            'detail' => 'Доступ к ресурсу ограничен'
+          }
+        )
       end
     end
 
