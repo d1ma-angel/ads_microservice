@@ -2,6 +2,6 @@
 
 require './dependencies'
 
-map '/ads' do
+map '/ads/v1' do
   run ApplicationController
 end

@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class AdsController < BaseController
+  include Concerns::Auth
+  include Concerns::PaginationLinks
+
   get '/?' do
     ads = Ad.order(updated_at: :desc).page(params[:page])
     serializer = AdSerializer.new(ads, links: pagination_links(ads))
@@ -9,9 +12,9 @@ class AdsController < BaseController
   end
 
   post '/?' do
-    required_params 'user_id', 'ad' => %w[title description city]
+    required_params 'ad' => %w[title description city]
 
-    result = Ads::CreateService.call(params.deep_symbolize_keys)
+    result = Ads::CreateService.call(user_id: user_id, ad: params[:ad])
 
     if result.success?
       serializer = AdSerializer.new(result.ad)

@@ -9,6 +9,7 @@ loader = Zeitwerk::Loader.new
 %w[
   app/controllers
   app/errors
+  app/lib
   app/models
   app/serializers
   app/services
