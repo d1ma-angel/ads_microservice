@@ -6,6 +6,8 @@ git_source(:github) { |repo_name| "https://github.com/#{repo_name}" }
 ruby '2.7.4'
 
 gem 'dry-initializer'
+gem 'faraday'
+gem 'faraday_middleware'
 gem 'i18n'
 gem 'jsonapi-serializer'
 gem 'kaminari'
@@ -29,8 +31,8 @@ group :development do
 end
 
 group :test do
+  gem 'database_cleaner-active_record', require: 'database_cleaner/active_record'
   gem 'factory_bot'
   gem 'rack-test'
   gem 'rspec'
-  gem 'database_cleaner-active_record'
 end

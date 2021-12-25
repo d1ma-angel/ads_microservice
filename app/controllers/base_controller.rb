@@ -14,7 +14,6 @@ class BaseController < Sinatra::Base
   end
 
   include Concerns::ApiErrors
-  include Concerns::PaginationLinks
 
   error 400 do
     handle_exception(RequiredParamMissing.new)

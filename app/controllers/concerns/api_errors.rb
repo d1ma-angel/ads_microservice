@@ -6,6 +6,8 @@ module Concerns
 
     def handle_exception(err)
       case err
+      when Auth::Unauthorized
+        error_response(I18n.t(:unauthorized, scope: 'api.errors'), 403)
       when ActiveRecord::RecordNotFound
         error_response(I18n.t(:not_found, scope: 'api.errors'), 404)
       when ActiveRecord::RecordNotUnique
