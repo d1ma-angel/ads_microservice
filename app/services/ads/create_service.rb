@@ -10,6 +10,11 @@ module Ads
       option :city
     end
 
+    option :coordinates do
+      option :lat
+      option :lon
+    end
+
     option :user_id
 
     attr_reader :ad
@@ -19,7 +24,9 @@ module Ads
         title: @ad.title,
         description: @ad.description,
         city: @ad.city,
-        user_id: @user_id
+        user_id: @user_id,
+        lat: @coordinates.lat,
+        lon: @coordinates.lon
       )
       return fail!(@ad.errors) unless @ad.save
     end
